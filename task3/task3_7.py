@@ -1,50 +1,35 @@
-# 7. В одномерном массиве целых чисел определить два наименьших элемента.
-# Они могут быть как равны между собой (оба являться минимальными), так и различаться.
+import turtle
+import time
 
-import random
+turtle.hideturtle()
+turtle.tracer(0)
+turtle.penup()
+turtle.setposition(-200, 0)
+turtle.pendown()
 
-SIZE = 1500
-MIN_ITEM = 0
-MAX_ITEM = 100
-array = [random.randint(MIN_ITEM, MAX_ITEM) for _ in range(SIZE)]
+axiom = "F"
+tempAx = ""
+iterable = 4
 
-print(array)
+logic = {
+    'F': 'F+F−F−F+F'
+}
 
-# def min2_array(array):
-#     num_min = -1
-#     new_array = []
-#     array_2 = array[::]
-#     while True:
-#         num_min += 1
-#         for i, item in enumerate(array_2):
-#             #print(i, item, num_min)
-#             if num_min == item:
-#                 num_min = i
-#                 new_array.append(array_2[i])
-#                 del array_2[i]
-#                 if len(new_array) - 1 == 1:
-#                     return new_array
-#                 else:
-#                     continue
-# num_min_2 = min2_array(array_1)
-# print(num_min_2)
-# Опыт оказался неудачным...
+for i in range(iterable):
+    for j in axiom:
+        if j in logic:
+            tempAx += logic[j]
+        else:
+            tempAx += j
+    axiom, tempAx = tempAx, ''
 
-if array[0] > array[1]:
-    min1 = 0
-    min2 = 1
-else:
-    min1 = 1
-    min2 = 0
+for k in axiom:
+    if k == '+':
+        turtle.right(-90)
+    elif k == '−':
+        turtle.left(-90)
+    else:
+        turtle.forward(5)
 
-size = len(array) - 1
-for i in range(2, size):
-    if array[i] < array[min1]:
-        b = min1
-        min1 = i
-        if array[b] < array[min2]:
-            min2 = b
-    elif array[i] < array[min2]:
-        min2 = i
-
-print(f'Два наименьших элемента в массиве: {array[min1]}, {array[min2]}')
+turtle.update()
+turtle.mainloop()
